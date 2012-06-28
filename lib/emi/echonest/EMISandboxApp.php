@@ -90,7 +90,7 @@ class EMISandboxApp {
 		$this->conn = mysql_connect('localhost', DATABASE_USER, DATABASE_PASSWORD);
 		mysql_select_db(DATABASE_NAME);
 		
-		$create_table = "CREATE TABLE `emi_gorillaz`.`assets` (
+		$create_table = "CREATE TABLE `assets` (
 		`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 		`echonest_id` VARCHAR( 255 ) NOT NULL ,
 		`sandbox_id` VARCHAR( 255 ) NOT NULL ,
