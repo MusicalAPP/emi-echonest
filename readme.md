@@ -47,7 +47,7 @@ This is sample app using a php Echo Nest API client to create a 3D Carousel. It 
 
 You will need to index the Echo Nest sandbox to the local database before use:
 
-Browse to /path/to/your/app/api.php?action=index
+Browse to http://localhost/path/to/your/app/api.php?action=index
 
 You may need to change your max_script_execution time in php.ini if the script times out while indexing.
 
