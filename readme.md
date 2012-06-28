@@ -12,16 +12,16 @@ This is sample app using a php Echo Nest API client to create a 3D Carousel. It 
 
 ## Set up
 
-Clone this repo to your development server:
+### Clone this repo to your development server:
 	
 	git clone https://github.com/theflyingbrush/emi-echonest.git
 
-Update the submodules
+### Update the submodules
 
 	git submodule init
 	git submodule update
 
-Create a local MySQL database:
+### Create a local MySQL database:
 
 	mysql -u {your_user} --password={your_password}
 
@@ -29,7 +29,7 @@ Create a local MySQL database:
 
 	mysql > exit;
 
-Configure the app. Edit config/Config.php and provide:
+### Configure the app. Edit config/Config.php and provide:
 
 * Your Echo Nest API KEY
 * Your Echo Nest Sandbox Key. The app works with emi_gorillaz out of the box.
@@ -43,7 +43,7 @@ Configure the app. Edit config/Config.php and provide:
 
 * Your local database details: database name (emi_echonest, if you used the one above), username and password.
 
-Create the index
+###Create the index
 
 You will need to index the Echo Nest sandbox to the local database before use:
 
