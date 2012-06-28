@@ -3,3 +3,4 @@ inc/
 assets/
 config/Config_marc.php
 packshots/**
+**/.DS_Store
