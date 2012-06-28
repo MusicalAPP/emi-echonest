@@ -1,7 +1,5 @@
 <?php
 
-//ini_set('error_log',dirname(__FILE__) . "/error_log");
-
 require("Zend/Loader/Autoloader.php");
 $autoloader = Zend_Loader_Autoloader::getInstance();
 
@@ -146,16 +144,13 @@ class EMISandboxApp {
 	private function track_profile(){
 		$id = $_GET["id"];
 		$result = $this->track->profile($id, "audio_summary");
-		
 		echo json_encode($result);
 	}
 
 	private function song_profile(){
 		$id = $_GET["id"];
 		$result = $this->song->profile($id);
-		
 		echo json_encode($result);
-		
 	}
 
 	private function access(){
@@ -188,6 +183,7 @@ class EMISandboxApp {
 	}
 
 	private function image_url_for_product($title){
+		// see if amazon have a packshot for us
 		$results = $this->amazon->itemSearch(array('SearchIndex' => 'MP3Downloads',
                                      'Title' => $title,
                                      'Creator' => "Gorillaz",
@@ -202,12 +198,11 @@ class EMISandboxApp {
   			}
 		}
 
+		// no joy with amazon, let's try itunes...
 		$itunes = $this->do_itunes_search($title);
-		//var_dump($itunes);
 		foreach($itunes->results as $result){
 			if( stristr($result->artistName, "Gorillaz") !== FALSE){
 				$artwork_url = $result->artworkUrl100;
-				//http://a1.mzstatic.com/us/r1000/007/Music/y2004/m06/d23/h15/s06.cbagdien.100x100-75.jpg
 				$large_url = str_replace("100x100", "200x200", $artwork_url);
 				return $large_url;
 			}
@@ -215,34 +210,7 @@ class EMISandboxApp {
 
 	}
 
-	public function amazon_search(){
-		header("Content-type: text/html");
-		$title = $_GET["title"];
-		$results = $this->amazon->itemSearch(array('SearchIndex' => 'MP3Downloads',
-                                     'Title' => $title,
-                                     'Creator' => "Gorillaz",
-                                     'ResponseGroup' => "Medium,Images"));
-
-		foreach ($results as $result) {
-
-			if(isset($result->Creator) && $result->Creator == "Gorillaz"){
-
-				if(isset($result->Publisher) && strstr($result->Publisher, "EMI") !== FALSE){
-					echo "<p>{$result->Title}</p>";
-					echo "<p>{$result->Creator}</p>";
-					echo "<p>{$result->Publisher}</p>";
-					echo "<img src='" . $result->LargeImage->Url->getUri() . "'>";
-					echo "<p>------------------</p>";
-				}
-    		//return $result->LargeImage->Url->getUri();
-  			}
-		}
-
-	}
-
 	private function do_itunes_search($title){
-
-//http://itunes.apple.com/search?media=music&entity=musicTrack&term=Faust&country=gb
 
 		$title = urlencode($title);
 		$url = "http://itunes.apple.com/search?media=music&entity=musicTrack&term=$title&country=gb";
@@ -252,33 +220,11 @@ class EMISandboxApp {
 
 	}
 
-	public function itunes_search(){
-		$title = urldecode($_GET["title"]);
-		header("Content-type: text/html");
-		$itunes = $this->do_itunes_search($title);
-		foreach($itunes->results as $result){
-			if( stristr($result->artistName, "Gorillaz") !== FALSE){
-				$artwork_url = $result->artworkUrl100;
-				//http://a1.mzstatic.com/us/r1000/007/Music/y2004/m06/d23/h15/s06.cbagdien.100x100-75.jpg
-				$large_url = str_replace("100x100", "200x200", $artwork_url);
-				var_dump($result->trackName);
-				var_dump($result->collectionName);
-				var_dump($large_url);
-			}
-		}
-	}
-
 	private function make_webgl_friendly_image($url){
 		
 		if(!$url){return false;}
 		$file = substr($url, 0, -3);
 		return $file . "_SX256_AA256_.jpg";
-	}
-
-	public function view(){
-		$access = $this->sandbox->access($_GET["id"]);
-		
-		echo json_encode($access);
 	}
 
 	private function _file_extension_from_filename($name){
