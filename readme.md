@@ -1,55 +1,63 @@
-# [HTML5 Boilerplate](http://html5boilerplate.com)
+# OpenEMI Echo Nest Demo
 
-HTML5 Boilerplate is a professional front-end template that helps you build fast, robust, adaptable, and future-proof websites. Spend more time developing and less time reinventing the wheel.
+This is sample app using a php Echo Nest API client to create a 3D Carousel. It works with the Gorillaz sandbox, but with some tweaks it should work with others. 
 
-This project is the product of many years of iterative development and combined community knowledge. It does not impose a specific development philosophy or framework, so you're free to architect your code in the way that you want.
+## You'll need..
 
+* A local dev server running PHP+MySQL
+* PHP user will need write permissions on the packshots/ directory
+* An Echo Nest developer account
+* Echo Nest / OpenEMI Sandbox access
+* An Amazon Product Advertising API account
 
-## Quick start
+## Set up
 
-Clone the git repo - `git clone git://github.com/h5bp/html5-boilerplate.git` - or [download it](https://github.com/h5bp/html5-boilerplate/zipball/master)
+Clone this repo to your development server:
+	
+	git clone https://github.com/theflyingbrush/emi-echonest.git
 
+Update the submodules
 
-## Features
+	git submodule init
+	git submodule update
 
-* HTML5 ready. Use the new elements with confidence.
-* Cross-browser compatible (Chrome, Opera, Safari, Firefox 3.6+, IE6+).
-* Designed with progressive enhancement in mind.
-* CSS normalizations and common bug fixes.
-* IE-specific classes for easier cross-browser control.
-* A default print stylesheet, performance optimized.
-* Mobile browser optimizations.
-* Protection against any stray `console.log` causing JavaScript errors in IE6/7.
-* The latest jQuery via CDN, with a local fallback.
-* A custom Modernizr build for feature detection.
-* An optimized Google Analytics snippet.
-* Apache server caching, compression, and other configuration defaults for Grade-A performance.
-* Cross-domain Ajax and Flash.
-* "Delete-key friendly." Easy to strip out parts you don't need.
-* Extensive inline and accompanying documentation.
+Create a local MySQL database:
 
+	mysql -u {your_user} --password={your_password}
 
-## Contributing
+	mysql > CREATE DATABASE emi_echonest;
 
-Anyone and everyone is welcome to [contribute](https://github.com/h5bp/html5-boilerplate/wiki/contribute). Hundreds of developers have helped make the HTML5 Boilerplate what it is today.
+	mysql > exit;
 
+Configure the app. Edit config/Config.php and provide:
 
-## Project information
+* Your Echo Nest API KEY
+* Your Echo Nest Sandbox Key. The app works with emi_gorillaz out of the box.
+* Your Echo Nest OAuth Consumer Key
+* Your Echo Nest OAuth Shared Secret
 
-* Source: http://github.com/h5bp/html5-boilerplate
-* Web: http://html5boilerplate.com
-* Docs: http://html5boilerplate.com/docs
-* Twitter: http://twitter.com/h5bp
+* Your Amazon API KEY
+* Your Amazon OAuth Consumer Key
+* Your Amazon OAuth Shared Secret
+* Your Amazon Associate Tag (if you don't have one, any string will do)
 
+* Your local database details: database name (emi_echonest, if you used the one above), username and password.
 
-## License
+Create the index
 
-### Major components:
+You will need to index the Echo Nest sandbox to the local database before use:
 
-* jQuery: MIT/GPL license
-* Modernizr: MIT/BSD license
-* Normalize.css: Public Domain
+Browse to /path/to/your/app/api.php?action=index
 
-### Everything else:
+You may need to change your max_script_execution time in php.ini if the script times out while indexing.
 
-The Unlicense (aka: public domain)
+## Customising for a different sandbox
+
+If you want to try a different sandbox with this app, you'll have trouble getting packshots from amazon and itunes. Replace mentions of Gorillaz from lib/emi/echonest/EMISandboxApp.php with your chosen artist, or if using a mixed-artist sandbox, just remove the conditions that check the artist name.
+
+## Supporting libs kindly provided by:
+
+* php-echonest-client (https://github.com/bshaffer/php-echonest-api)
+* Three.js (https://github.com/mrdoob/three.js/)
+* Threex.js (https://github.com/jeromeetienne/threex)
+* Tween.js (https://github.com/sole/tween.js/)
