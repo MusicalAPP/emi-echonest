@@ -1,0 +1,3 @@
+[submodule "lib/php-echonest-api"]
+	path = lib/php-echonest-api
+	url = https://github.com/theflyingbrush/php-echonest-api.git
