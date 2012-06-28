@@ -2,6 +2,6 @@ Zend_Full/
 inc/
 assets/
 config/Config_marc.php
-packshots/**
+packshots/*.jpg
 **/.DS_Store
 amazon_test.php
