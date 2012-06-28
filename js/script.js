@@ -188,8 +188,12 @@
     }
 
     function createCarousel(items){
+
         var num = items.length;
-        
+        if(num == 0){
+            alert("Hmmm, no results. Better check your configuration.");
+        }
+
         geometry = new THREE.CubeGeometry( 100, 100, 10 );
         var planeGeometry = new THREE.PlaneGeometry(100,100);
         

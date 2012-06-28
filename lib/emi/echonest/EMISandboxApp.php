@@ -21,6 +21,7 @@ class EMISandboxApp {
 
 	public function __construct($api_key, $consumer_key, $shared_secret, $sandbox_name, $debug = false){
 
+		try {
 		$this->api_key = $api_key;
 		$this->sandbox_name = $sandbox_name;
 		$this->debug = $debug;
@@ -43,12 +44,20 @@ class EMISandboxApp {
 		$this->action = isset($_GET["action"]) ? $_GET["action"] : "index";
 		
 		$this->render($this->action);
+		} catch (Exception $e){
+			header("Content-type: application/json");
+			echo "[]";
+		}
 		
 	}
 
 	public function render($action){
 			header("Content-type: application/json");
+			try {
 			call_user_func(array($this, $action));
+			} catch (Exception $e){
+				echo "[]";
+			}
 		
 	}
 
