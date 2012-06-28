@@ -1,6 +1,6 @@
 # OpenEMI Echo Nest Demo
 
-This is sample app using a php Echo Nest API client to create a 3D Carousel. It works with the Gorillaz sandbox, but with some tweaks it should work with others. 
+This is a sample app using a php Echo Nest API client to create a 3D Carousel. It works with the Gorillaz sandbox, but with some tweaks it should work with others. Google Chrome only!
 
 ## You'll need..
 
@@ -50,6 +50,10 @@ You will need to index the Echo Nest sandbox to the local database before use:
 Browse to http://localhost/path/to/your/app/api.php?action=index
 
 You may need to change your max_script_execution time in php.ini if the script times out while indexing.
+
+### Run the app
+
+Launch Google Chrome and browse to http://localhost/path/to/your/app/
 
 ## Customising for a different sandbox
 
